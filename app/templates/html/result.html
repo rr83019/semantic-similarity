@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Passage Comparing</title>
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		{% load staticfiles %}
+		<link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
+		<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+		<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="{% static 'css/templatemo-style.css' %}">
+		<script src="{% static 'js/jquery.js' %}"></script>
+		<script src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'js/jquery.singlePageNav.min.js' %}"></script>
+		<script src="{% static 'js/typed.js' %}"></script>
+		<script src="{% static 'js/wow.min.js' %}"></script>
+		<script src="{% static 'js/custom.js' %}"></script>
+
+		<!-- graph-->
+	<script>
+	var doughnutData = [{
+    value: {{result3}},
+    color: "Green",
+    highlight: "Green"
+    //label: "Red"
+  }, {
+    value: {{result4}},
+    color: "#FFFFFF",
+    highlight: "#FFFFFF"
+    //label: "Green"
+  }
+];
+
+window.onload = function() {
+  var canvas = document.getElementById("chart-area");
+  var ctx = document.getElementById("chart-area").getContext("2d");
+  window.myDoughnut = new Chart(ctx).Doughnut(doughnutData, {
+    responsive: true,
+    onAnimationComplete: addText
+  });
+
+};
+/*
+var myDoughnutChart = new Chart(ctx).Doughnut(data);
+var myDoughnutChart = new Chart(ctx).Doughnut(doughnutData, {
+  responsive: true,
+  onAnimationComplete: addText
+});
+*/
+
+function addText() {
+
+  var canvas = document.getElementById("chart-area");
+  var ctx = document.getElementById("chart-area").getContext("2d");
+
+  var cx = canvas.width / 2;
+  var cy = canvas.height / 2;
+
+  document.getElementById('res').innerHTML = doughnutData[0]["value"]+"%";
+	document.getElementById('wc1').innerHTML = {{fwordcount}};
+	document.getElementById('wc2').innerHTML = {{swordcount}};
+	document.getElementById('wc3').innerHTML = {{summarized}};
+	/*for(var i=0; i<3; i++)
+	{
+		var topcom = "topcom"+(i+1);
+		document.getElementById(topcom).innerHTML = "val";
+	}*/
+/*
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.font = '14px verdana';
+  ctx.fillStyle = 'black';
+  ctx.fillText("Percentage", cx, cy);
+*/
+}
+</script>
+<style>
+body {
+  padding: 10px;
+  margin: 0;
+}
+#canvas-holder {
+  width: 30%;
+  height: 50%;
+}
+canvas {
+  border: 1px solid #28a7e9;
+}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.1/Chart.min.js"></script>
+</head>
+	<body id="top">
+
+		<!-- start preloader -->
+		<div class="preloader">
+			<div class="sk-spinner sk-spinner-wave">
+     	 		<div class="sk-rect1"></div>
+       			<div class="sk-rect2"></div>
+       			<div class="sk-rect3"></div>
+      	 		<div class="sk-rect4"></div>
+      			<div class="sk-rect5"></div>
+     		</div>
+    	</div>
+    	<!-- end preloader -->
+
+
+    	<!-- start navigation -->
+		<nav class="navbar navbar-default templatemo-nav" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="icon icon-bar"></span>
+						<span class="icon icon-bar"></span>
+						<span class="icon icon-bar"></span>
+					</button>
+					<a href="#" class="navbar-brand">Localhost</a>
+				</div>
+				<div class="collapse navbar-collapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="index.html">HOME</a></li>
+						<!--li><a href="#about">ABOUT</a></li>
+						<li><a href="#team">TEAM</a></li>
+						<li><a href="#service">SERVICE</a></li>
+						<li><a href="#portfolio">PORTFOLIO</a></li-->
+						<li><a href="index.html#contact">COMPARE</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<!-- end navigation -->
+		<br><br><br>
+		<center>
+		<h2>Comparison Result</h2>
+				<br>
+				<div class="col-md-3"></div>
+				<div class="col-md-6">
+					<center>
+					<div id="canvas-holder">
+					  <canvas id="chart-area" width="300" height="300" />
+					</div>
+					<h3><p id="res"></p></h3>
+					</center>
+					<h4 style="padding-top: 10px;"><p>
+						Word count of first passage: <c id="wc1"></c><br><br>
+						Word count of second passage: <c id="wc2"></c><br><br>
+						Word count of summarized passage: <c id="wc3"></c><br><br>
+						<!--Top 3 common words: <br><br>
+						1. <c id="topcom1"></c><br>
+						2. <c id="topcom2"></c><br>
+						3. <c id="topcom3"></c><br>-->
+					</p></h4>
+				</div>
+	<div class="col-md-3"></div>
+
+	</body>
+</html>

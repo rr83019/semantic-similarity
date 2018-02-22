@@ -1,0 +1,15 @@
+<html>
+<center><h1>Hello Android</h1></center>
+  <form method="post">
+
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">Compare</button><br>
+    Before lamitization : {{result}}<br>
+    After lamitization : {{result1}}<br>
+    After tfidf : {{result3}}
+  </form>
+  First passage: {{lem1}}<br>
+  Second passage: {{lem2}}<br>
+
+</html>
